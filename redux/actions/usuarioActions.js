@@ -6,7 +6,7 @@ const usuarioActions = {
            const usuario = await axios.post('https://mytinerary-cirulli.herokuapp.com/api/usuario/registro',{primerNombre, apellido,  email, contraseña, fotoPerfil, pais,google,rol})
            if(usuario.data.success){
                console.log(usuario.data)
-                localStorage.setItem('token',usuario.data.response.token)
+                
                 dispatch({type:'iniciarSesion', payload:{usuario:usuario.data.response.nuevoUsuario.primerNombre,fotoPerfil: usuario.data.response.nuevoUsuario.fotoPerfil,email:usuario.data.response.nuevoUsuario.email, _id: usuario.data.response._id,rol: usuario.data.response.rol}})
                 return usuario
            }else{
@@ -23,7 +23,7 @@ const usuarioActions = {
             if(!usuario.data.success){
                 return usuario
             }else{
-                localStorage.setItem('token',usuario.data.response.token)
+                
                  dispatch({type:'iniciarSesion', payload:{usuario:usuario.data.response.primerNombre,fotoPerfil: usuario.data.response.fotoPerfil,email:usuario.data.response.email, _id: usuario.data.response._id, rol: usuario.data.response.rol}})
                 return usuario
             }
@@ -31,7 +31,7 @@ const usuarioActions = {
     },
     cerrarSesion: () =>{
         return (dispatch,getState) =>{
-            localStorage.clear()
+           
             dispatch({type:'cerrar',payload:{}})
         }
     },

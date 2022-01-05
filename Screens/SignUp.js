@@ -69,17 +69,29 @@ const SignUp = () => {
 
   const probando = async()=>{
    
-    // try{
+    try{
 
-    //   const res = await dispatch(usuarioActions.nuevoUsuario(values))
-    //   console.log(res)
-    // }catch(err){console.log(err)}
-    showMessage({
-      message: "as",
-      type: "danger",
-      floating : true,
-      position : 'bottom'
-    });
+      const res = await dispatch(usuarioActions.nuevoUsuario(values))
+      if(res.data.error){
+        showMessage({
+          message: res.data.response.map( error => {
+            return  error.message +', '
+          }),
+          type: "danger",
+          floating : true,
+          position : 'bottom'
+        });
+      }else{
+        showMessage({
+          message: 'Welcome ' + res.data.response.nuevoUsuario.primerNombre,
+          type: "success",
+          floating : true,
+          position : 'bottom'
+        });
+      }
+    }catch(err){console.log(err)}
+
+   
   }
 
 
