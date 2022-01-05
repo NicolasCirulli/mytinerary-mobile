@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Dimensions, Text } from "react-native";
+import {ScrollView ,View, StyleSheet, Dimensions } from "react-native";
 import { Input , Button} from "react-native-elements";
 import SelectDropdown from "react-native-select-dropdown";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { showMessage, hideMessage } from "react-native-flash-message";
 import usuarioActions from "../redux/actions/usuarioActions";
 const SignUp = () => {
-  const [countries, setCountries] = useState([]);
+  // const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState(null);
   const [booleano, setBooleano] = useState(true)
 
@@ -16,16 +17,21 @@ const SignUp = () => {
 
   const dispatch = useDispatch();
 
+
+  const countries = ["Egypt", "Canada", "Australia", "Ireland", "Argentina", "Colombia", "Peru","United States", "Chile", "China", "Japan", "Pakistan", "Colombia", "Uruguay", "Cuba"]
+
+
   const { values, isSubmitting, setFieldValue } = useFormik({
     initialValues: {
-      firtsName: "",
-      lastName: "",
+      primerNombre: "",
+      apellido: "",
       email: "",
-      password: "",
-      urlPhoto: "",
+      contraseña: "",
+      fotoPerfil: "",
+      pais:''
     },
     onSubmit: (values) => {
-      console.log();
+      console.log(values);
     },
   });
 
@@ -38,60 +44,97 @@ const SignUp = () => {
       justifyContent: "center",
     },
   });
-  useEffect(async () => {
-    try {
-      const res = await axios.get(
-        "https://restcountries.com/v2/all?fields=name"
-      );
-      const aux = [];
-      res.data.map((country) => {
-        aux.push(country.name);
-      });
-      setCountries(aux);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+  // useEffect(async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       "https://restcountries.com/v2/all?fields=name"
+  //     );
+  //     const aux = [];
+  //     res.data.map((country) => {
+  //       aux.push(country.name);
+  //     });
+  //     setCountries(aux);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }, []);
 
   useEffect(() => {
       const valores = Object.values(values)
-      !valores.some(value => value === '') && country
-      && setBooleano(false)
-  }, [values, country])
+      console.log(valores)
+      !valores.some(value => value === '')
+      ? setBooleano(false)
+      : setBooleano(true)
+  }, [values])
+
+  const probando = async()=>{
+   
+    // try{
+
+    //   const res = await dispatch(usuarioActions.nuevoUsuario(values))
+    //   console.log(res)
+    // }catch(err){console.log(err)}
+    showMessage({
+      message: "as",
+      type: "danger",
+      floating : true,
+      position : 'bottom'
+    });
+  }
+
 
   return (
-    <View style={styles.contenedor}>
+    <ScrollView >
+      <View style={styles.contenedor}>
+
+      
       <Input
-        placeholder="Firts Name"
+        label="Firts Name"
         value={values.firtsName}
-        onChangeText={(text) => setFieldValue("firtsName", text)}
+        onChangeText={(text) => setFieldValue("primerNombre", text)}
+        inputStyle={{
+          color:'#FFF'
+        }}
       />
       <Input
-        placeholder="Last Name"
+        label="Last Name"
         value={values.lastName}
-        onChangeText={(text) => setFieldValue("lastName", text)}
+        onChangeText={(text) => setFieldValue("apellido", text)}
+        inputStyle={{
+          color:'#FFF'
+        }}
       />
       <Input
-        placeholder="Email"
+        // placeholder="Email"
         value={values.email}
         onChangeText={(text) => setFieldValue("email", text)}
+        inputStyle={{
+          color:'#FFF'
+        }}
+        label='email'
       />
       <Input
-        placeholder="Password"
+        label="Password"
         secureTextEntry={true}
         value={values.password}
-        onChangeText={(text) => setFieldValue("password", text)}
+        onChangeText={(text) => setFieldValue("contraseña", text)}
+        inputStyle={{
+          color:'#FFF'
+        }}
       />
       <Input
-        placeholder="Url Photo"
+        label="Url Photo"
         value={values.urlPhoto}
-        onChangeText={(text) => setFieldValue("urlPhoto", text)}
+        onChangeText={(text) => setFieldValue("fotoPerfil", text)}
+        inputStyle={{
+          color:'#FFF'
+        }}
       />
 
       <SelectDropdown
         data={countries}
         onSelect={(selectedItem, index) => {
-          setCountry(selectedItem)
+          setFieldValue('pais',selectedItem)
         }}
         defaultButtonText="Country"
         buttonStyle={{ marginHorizontal: widthScreen / 4 , height: 30}}
@@ -115,8 +158,10 @@ const SignUp = () => {
           marginHorizontal: widthScreen / 6,
           marginVertical: 30,
         }}
+        onPress={()=>probando()}
       />
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 

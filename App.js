@@ -4,6 +4,9 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import mainReducer from "./redux/reducers/mainReducer";
+
+import FlashMessage from "react-native-flash-message";
+
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reduxStore = createStore(
   mainReducer,
@@ -25,6 +28,7 @@ export default function App() {
         {/* <Cities /> */}
         <SignUp />
         <StatusBar style="auto" />
+        <FlashMessage position="top" />
       </View>
     </Provider>
   );
