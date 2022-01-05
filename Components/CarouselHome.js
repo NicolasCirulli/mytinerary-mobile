@@ -12,7 +12,7 @@ export default function CarouselHome({imagenes, height, width}) {
         return (
             <View style={styles.contenedorCarousel}>
             <Image 
-                style={{width,height, borderRadius:'5px',}}
+                style={{width,height}}
                 placeholderContent={<ActivityIndicator color='#FFF' /> }
                 source={{ uri : item.imagen}}
                 />

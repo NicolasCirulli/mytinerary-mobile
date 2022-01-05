@@ -41,8 +41,9 @@ export default CardCities
 
 const styles = StyleSheet.create({
     CardCities: {
-        backgroundColor:'#ffaf34'
-    }
+        backgroundColor:'#ffaf34',
+    },
+    
 })
 
   

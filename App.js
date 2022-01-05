@@ -15,13 +15,15 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Home from "./Screens/Home";
 import Cities from "./Screens/Cities";
+import SignUp from "./Screens/SignUp";
 
 export default function App() {
   return (
     <Provider store={reduxStore}>
       <View style={styles.container}>
-        <Home/>
+        {/* <Home/> */}
         {/* <Cities /> */}
+        <SignUp />
         <StatusBar style="auto" />
       </View>
     </Provider>
