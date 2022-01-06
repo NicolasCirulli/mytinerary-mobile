@@ -116,7 +116,8 @@ const fondo = {
   uri: "https://mytinerary-cirulli.herokuapp.com/static/media/fondo2.98f09f2a.jpg",
 };
 
-const Home = () => {
+const Home = (props) => {
+  const {navigate} = props.navigation
   return (
     <>
       <ScrollView style={{ width: widthScreen, backgroundColor: "#414141" }}>
@@ -139,6 +140,7 @@ const Home = () => {
                 marginHorizontal: 100,
                 marginVertical: 20,
               }}
+              onPress={()=> navigate('Cities')}
               buttonStyle={{ backgroundColor: "rgba(255, 193, 7, 1)" }}
               titleStyle={{
                 color: "white",

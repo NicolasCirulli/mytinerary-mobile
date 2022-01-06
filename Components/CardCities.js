@@ -2,7 +2,8 @@ import React from 'react'
 import { View, Text,StyleSheet } from 'react-native'
 import {Card, Button, Icon} from 'react-native-elements'
 
-const CardCities = ({datos}) => {
+const CardCities = ({data,datos}) => {
+  const {navigate} = data.navigation
     return (
         <>
         
@@ -20,6 +21,8 @@ const CardCities = ({datos}) => {
               {datos.descripcion}
             </Text>
             <Button
+              onPress={()=> navigate('City', datos._id
+              )}
               buttonStyle={{
                 borderRadius: 0,
                 marginLeft: 0,

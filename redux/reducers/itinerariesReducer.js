@@ -1,6 +1,7 @@
 const initialState = {
     itinerarios: [],
-    itinerario: {}
+    itinerario: {},
+    itinerariosCiudad: []
 }
 
 const itinerariesReducer = (state = initialState, action)=>{

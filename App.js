@@ -5,6 +5,10 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import mainReducer from "./redux/reducers/mainReducer";
 
+import { NavigationContainer } from '@react-navigation/native'
+
+import DrawerNavigator from './navigation/Drawer'
+
 import FlashMessage from "react-native-flash-message";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -16,20 +20,18 @@ const reduxStore = createStore(
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-import Home from "./Screens/Home";
-import Cities from "./Screens/Cities";
-import SignUp from "./Screens/SignUp";
 
 export default function App() {
+  
   return (
     <Provider store={reduxStore}>
-      <View style={styles.container}>
-        {/* <Home/> */}
-        {/* <Cities /> */}
-        <SignUp />
-        <StatusBar style="auto" />
-        <FlashMessage position="top" />
-      </View>
+      <NavigationContainer>
+        <DrawerNavigator style={styles.container}/>
+          <View >
+            <StatusBar style="auto" />
+            <FlashMessage position="top" />
+          </View>
+      </NavigationContainer>
     </Provider>
   );
 }

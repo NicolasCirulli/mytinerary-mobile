@@ -4,9 +4,10 @@ import {Input} from 'react-native-elements'
 import CardCities from '../Components/CardCities';
 import { useDispatch, useSelector } from 'react-redux';
 import citiesActions from '../redux/actions/citiesActions'
-const Cities = () => {
+const Cities = (props) => {
 
     
+
     const dispatch = useDispatch()
     const ciudadesStore = useSelector(state => state.citiesReducer.ciudadesFiltradas)
     const filtro = useRef()
@@ -23,7 +24,6 @@ const Cities = () => {
 
     const handleText = (e)=>{
         dispatch(citiesActions.filtrarCiudades(e.nativeEvent.text, 'City'))
-        
     }
     const fondo = {
         uri: "https://mytinerary-cirulli.herokuapp.com/static/media/headerCities.95fe6132.jpg",
@@ -47,7 +47,7 @@ const Cities = () => {
             />
             {
              ciudades.map( ciudad => {
-                 return <CardCities datos={ciudad} key={ciudad._id}/>
+                 return <CardCities datos={ciudad} data={props} key={ciudad._id}/>
              })   
             }   
         </ScrollView>
